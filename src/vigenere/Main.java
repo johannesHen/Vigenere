@@ -26,8 +26,8 @@ public class Main {
         
         CryptHandler ch = new CryptHandler();
         String enc,dec;
-        enc = ch.encrypt(message, "enlångkey");
-        dec = ch.decrypt(enc, "enlångkey");
+        enc = ch.encrypt(message, "enlkey");
+        dec = ch.decrypt(enc, "enlkey");
         System.out.println("dec lenght: " + dec.length());
         System.out.println("Encrypted: " + enc);
         System.out.println("Decrypted: " + dec);    
