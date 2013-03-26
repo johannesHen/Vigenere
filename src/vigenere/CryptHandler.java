@@ -23,7 +23,6 @@ public class CryptHandler {
         System.out.println("Sanitezed string: " + message);
         char messageChar, keyChar;
         String encryptedMessage = "";
-        message = message.toLowerCase();
         for (int i = 0; i < message.length(); i++) {
             messageChar = shiftChar(message.charAt(i));
             keyChar = shiftChar(key.charAt(i % key.length()));
@@ -42,13 +41,13 @@ public class CryptHandler {
      */
     public String decrypt(String cipher,String key){
         char cipherChar, keyChar;
+        cipher = sanitzeString(cipher);
         String decryptedMessage = "";
         cipher = cipher.toLowerCase();
         for (int i = 0; i < cipher.length(); i++) {
             cipherChar = shiftChar(cipher.charAt(i));
             keyChar = shiftChar(key.charAt(i % key.length()));
-            cipherChar = (char) ((cipherChar - keyChar));
-            cipherChar = fixOverflow(cipherChar);
+            cipherChar = (char) ((29 + cipherChar - keyChar) %  29);
             cipherChar = reShiftChar(cipherChar);
             decryptedMessage += cipherChar;
         }
@@ -57,14 +56,6 @@ public class CryptHandler {
     
     /*--- Below are the helper functions ---*/
     
-    private char fixOverflow(char n){
-        if(n < 50000){
-            return n;
-        } else{
-            n += 29;
-        }
-        return n;
-    }
     
     private String sanitzeString(String s) {
         Scanner scan = new Scanner(s);
@@ -75,7 +66,7 @@ public class CryptHandler {
             sanitzedString += temp;
         }
         scan.close();
-        return sanitzedString;
+        return sanitzedString.toLowerCase();
     }
 
     private char shiftChar(char c) {
