@@ -2,7 +2,6 @@ package vigenere;
 
 import java.util.Scanner;
 
-
 /**
  * Class for handling encryption and decryption of text strings. It uses the vigenere encryption algorithm.
  * @author JohannesH
