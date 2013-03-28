@@ -15,7 +15,7 @@ public class Main {
     public static void main(String[] args) {
         String message = "";
         try {
-            Scanner scan = new Scanner(new FileReader("text.txt"));
+            Scanner scan = new Scanner(new FileReader("vig_group8.plain"));
             while (scan.hasNext()) {
                 message += scan.next();
             }
