@@ -26,7 +26,7 @@ public class CryptHandler {
             messageChar = shiftChar(message.charAt(i));
             keyChar = shiftChar(key.charAt(i % key.length()));
             messageChar = (char) ((keyChar + messageChar) % 29);
-            messageChar = reShiftChar(messageChar);
+            messageChar = unshiftChar(messageChar);
             encryptedMessage += messageChar;
         }
         return encryptedMessage;
@@ -47,7 +47,7 @@ public class CryptHandler {
             cipherChar = shiftChar(cipher.charAt(i));
             keyChar = shiftChar(key.charAt(i % key.length()));
             cipherChar = (char) ((29 + cipherChar - keyChar) %  29);
-            cipherChar = reShiftChar(cipherChar);
+            cipherChar = unshiftChar(cipherChar);
             decryptedMessage += cipherChar;
         }
         return decryptedMessage;
@@ -57,17 +57,11 @@ public class CryptHandler {
     
     
     private String sanitzeString(String s) {
-        Scanner scan = new Scanner(s);
-        String sanitzedString = "", temp = "";
-        while (scan.hasNext()) {
-            temp = scan.next();
-            temp = temp.replaceAll("[^A-Za-zåäöÅÄÖ]", "");
-            sanitzedString += temp;
-        }
-        scan.close();
-        return sanitzedString.toLowerCase();
+        s = s.replaceAll("[^A-Za-zåäöÅÄÖ]", "");
+        return s.toLowerCase();
     }
-
+    
+    //Assigns characters a,b,c...å,ä,ö the values 1,2,3...,26,28,29.
     private char shiftChar(char c) {
         if (96 < c && c < 123) {
             c -= 97;
@@ -80,8 +74,9 @@ public class CryptHandler {
         }
         return c;
     }
-
-    private char reShiftChar(char c) {
+    
+    //Undoes the assignment in shiftChar and gives the characters back their UTF-8 values. 
+    private char unshiftChar(char c) {
         if (0 <= c && c <= 25) {
             c += 97;
         } else if (c == 26) {

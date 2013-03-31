@@ -8,7 +8,12 @@ import java.util.Map.Entry;
  * @author Rasmus Précenth
  */
 public class FrequencyFinder {
-	
+	/**
+	 * Finds the frequency of each character present in the supplied text.
+	 * @param text the text that is analyzed.
+	 * @return A hashmap where the key is the character in string form and the value is the frequency 
+	 * of the character in the text
+	 */
 	public static HashMap<String, Float> AnalyseText(String text) {
 		
 		HashMap<String, Integer> occurrenceTable = new HashMap<String, Integer>(); 

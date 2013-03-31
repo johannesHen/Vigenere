@@ -6,9 +6,7 @@ import com.sun.org.apache.xpath.internal.FoundIndex;
 import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 
 /**
- * 1. Get cipher
- * 2. ???
- * 3. PROFIT!(and the original message)
+ * Class for decryting a cipher encrypted with the Vigenere cipher.
  * @author JohannesH
  *
  */
@@ -18,11 +16,20 @@ public class CryptBreaker {
 	}
 	
 	/**
-	 * Finds the distance between the closest identical strings in a string
+	 * Calculates the length of the key by finding the distances between the closest identical substrings
+	 *  in a string finding the greatest common divisor for the distances.
+	
 	 * @param cipher the string that's operated on
-	 * @return an ArrayList of integers with the distances acquired
+	 * @return the probable length of the key
 	 */
-	private ArrayList<Integer> kasiski(String cipher){
+	
+	/*
+	 * Psudo-algorithm:
+	 * 1. Chose the best substring(Criteria? Number of occurrences? Length?).
+	 * 2. Collect all the distances.
+	 * 3. Find the greatest common divisor for the distances between the matches.
+	 */
+	private int kasiski(String cipher){
 		ArrayList<Integer> acc = new ArrayList<Integer>();
 		int i = 3,foundIndex, maxFound  = 0;
 		boolean stillFinding = true;
@@ -40,11 +47,12 @@ public class CryptBreaker {
 				maxFound = 0;
 			}
 		}
-		return null;
+		return 0;
 	}
 	
 	private String mostRepeated(String s){
 		int i = 3,foundIndex, maxFound  = 0,matchesFound = 0;
+		
 		boolean stillFinding = true;
 		String subString = "";
 		for(int n = 0;n < s.length();n++){

@@ -1,6 +1,7 @@
 package vigenere;
 
 import java.io.FileReader;
+import java.util.HashMap;
 import java.util.Scanner;
 
 /**
@@ -15,15 +16,16 @@ public class Main {
     public static void main(String[] args) {
         String message = "";
         try {
-            Scanner scan = new Scanner(new FileReader("vig_group8.plain"));
+            Scanner scan = new Scanner(new FileReader("text.txt"));
             while (scan.hasNext()) {
                 message += scan.next();
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         
+        HashMap<String, Float> hm = FrequencyFinder.AnalyseText(message);
+        System.out.println(hm.toString());
         CryptHandler ch = new CryptHandler();
         String enc,dec;
         enc = ch.encrypt(message, "nyckelsomärlång");
