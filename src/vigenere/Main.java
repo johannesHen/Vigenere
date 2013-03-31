@@ -23,13 +23,16 @@ public class Main {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        ///message = "eeefffååå";
         
-        HashMap<String, Float> hm = FrequencyFinder.AnalyseText(message);
-        System.out.println(hm.toString());
+        
         CryptHandler ch = new CryptHandler();
         String enc,dec;
         enc = ch.encrypt(message, "nyckelsomärlång");
+       
         dec = ch.decrypt(enc, "nyckelsomärlång");
+        HashMap<String, Float> hm = FrequencyFinder.AnalyseText(dec);
+        System.out.println(hm.toString());
         System.out.println("dec lenght: " + dec.length());
         System.out.println("Encrypted: " + enc);
         System.out.println("Decrypted: " + dec);    
