@@ -10,7 +10,7 @@ import java.util.regex.*;
  *
  */
 public class CryptBreaker {
-	public String breakCipher(String cipher){
+	public static String breakCipher(String cipher){
 		return "";
 	}
 	

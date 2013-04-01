@@ -53,14 +53,19 @@ public class CryptHandler {
         return decryptedMessage;
     }
     
-    /*--- Below are the helper functions ---*/
-    
-    
-    private String sanitzeString(String s) {
+    /**
+     * Prunes all characters not in the alphabet {A-Öa-ö} from a string and changes it to all lower case.
+     * @param s the string to be sanitized.
+     * @return The string s, sanitized
+     */
+    public String sanitzeString(String s) {
         s = s.replaceAll("[^A-Za-zåäöÅÄÖ]", "");
         return s.toLowerCase();
     }
     
+    
+    /*--- Below are the helper functions ---*/
+   
     //Assigns characters a,b,c...å,ä,ö the values 1,2,3...,26,28,29.
     private char shiftChar(char c) {
         if (96 < c && c < 123) {
