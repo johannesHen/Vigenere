@@ -19,7 +19,7 @@ public class FrequencyFinder {
 	 * exists in the hash before we use it. On the other hand we would need to bloat this class by adding a bunch
 	 * of lines of code. It's also more general this way.
 	 */
-	public static HashMap<String, Float> analyseText(String text) {
+	public static HashMap<String, Float> findLetterFrequency(String text) {
 		
 		HashMap<String, Integer> occurrenceTable = new HashMap<String, Integer>();
 		
@@ -47,6 +47,30 @@ public class FrequencyFinder {
 		
 		return results;
 	}
+	
+	/**
+	 * Analyzes the index of coincidence for a text
+	 * @param text
+	 * @return
+	 */
+	public static float ioc(String text){
+		HashMap<String,Float> letterFreq = findLetterFrequency(text);
+		float result = 0.0f;
+		for	(Entry<String, Float> kv : letterFreq.entrySet()) {
+			result += kv.getValue()*kv.getValue();
+		}
+		return result;
+	}
+	
+	public static float getStandardSwedishIoc(){
+		HashMap<String,Float> letterFreq = getStandardSwedishFrequency();
+		float result = 0.0f;
+		for	(Entry<String, Float> kv : letterFreq.entrySet()) {
+			result += kv.getValue()*kv.getValue();
+		}
+		return result;
+	}
+	
 	/**
 	 * The standard Swedish letter frequency according to http://en.wikipedia.org/wiki/Letter_frequency
 	 * @return A hashmap where the keys are the string form of the characters in the alphabet,{a,..,ö},

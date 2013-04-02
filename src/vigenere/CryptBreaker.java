@@ -6,14 +6,75 @@ import java.util.HashMap;
 import java.util.regex.*;
 
 /**
- * Class for decryting a cipher encrypted with the Vigenere cipher.
+ * Class for breaking a cipher encrypted with the Vigenere cipher.
  * 
  * @author JohannesH
  * 
  */
+
+/*
+ * Algorithm:
+ * 1. Find the key length, m.
+ * 2. Divide the text in m parts.
+ * 3. Analyze the letter frequency for each part of text separately and find a most probable
+ * 	  key value for each part.
+ * 4. Merge the keys for each part and try to decrypt the cipher-text with it.
+ */
 public class CryptBreaker {
+	
+	/**
+	 * Tries to find the key to a cipher-text by frequency analysis. 
+	 * @param cipher The cipher we are trying to find the key to.
+	 * @return The key determined to be most probable. 
+	 */
 	public static String breakCipher(String cipher) {
-		return "";
+		int keyLenght = 15;//The lenght of our key.
+		String[] dividedText = divideText(cipher,keyLenght);
+		
+		String result = "";
+		for(String s : dividedText){
+			System.out.println(s);
+			result += findMostProbableKey(s);
+		}
+		
+		return result;
+	}
+
+	public static String findMostProbableKey(String text){
+		CryptHandler ch = new CryptHandler();
+		String keyAppliedText, bestTryKey = "";
+		Float letterFreq, normalLetterFreq, bestTryValue = 1.0f;
+		normalLetterFreq = FrequencyFinder.getStandardSwedishIoc();
+		for(int i = 0;i < 29; i++){
+			String currentKey = "";
+			if(i < 26){
+				currentKey = String.valueOf((char)(i+97));
+			}else if(i == 26){
+				currentKey = "å";
+			}else if(i == 27){
+				currentKey = "ä";
+			}else if(i == 28){
+				currentKey = "ö";
+			}
+			keyAppliedText = ch.decrypt(text, currentKey);
+			letterFreq = FrequencyFinder.ioc(keyAppliedText);
+			if(Math.abs(normalLetterFreq-letterFreq) < bestTryValue){
+				bestTryKey = currentKey;
+				bestTryValue = Math.abs(normalLetterFreq-letterFreq);
+			}
+		}
+		return bestTryKey;
+	}
+	
+	private static String[] divideText(String text, int keyLength){
+		String[] result = new String[keyLength];
+		for(int i = 0;i < keyLength;i++){
+			result[i] = "";
+		}
+		for(int i = 0; i < text.length();i++){
+			result[i % keyLength] += String.valueOf(text.charAt(i));
+		}
+		return result;
 	}
 
 	/**
@@ -65,10 +126,10 @@ public class CryptBreaker {
 			}else{
 				s = sEnd;
 			}
-			System.out.println("Substring: " + subString + "\nsEnd: " + sEnd);
+			//System.out.println("Substring: " + subString + "\nsEnd: " + sEnd);
 			existMatch = false;
 		}
-		System.out.print(repetedWords.toString());
+		//System.out.print(repetedWords.toString());
 		return 0;
 	}
 }
