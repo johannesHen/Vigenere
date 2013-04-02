@@ -3,7 +3,7 @@ package vigenere;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
-/*
+/**
  * Class to analyze the letter frequencies of a text.
  * @author Rasmus Précenth
  */

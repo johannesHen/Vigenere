@@ -53,15 +53,17 @@ public class Main {
 			
 		}
 		
-		String message = ciphersRead.get(Paths.get("GroupCryptos/vig_group8.crypto"));
+		CryptBreaker.mostRepeated("hejdejlefhejnejhejdd");
+		/*String message = "varsågod";//ciphersRead.get(Paths.get("GroupCryptos/vig_group8.crypto"));
 
-		/*CryptHandler ch = new CryptHandler();
+		CryptHandler ch = new CryptHandler();
 		String enc, dec;
 
-		dec = ch.decrypt(message, "nyckelsomärlång");
+		enc = ch.encrypt(message, "tack");
+		dec = ch.decrypt(enc, "tack");
 		System.out.println("dec lenght: " + dec.length());
-		System.out.println("Encrypted: " + message);
-		System.out.println("Decrypted: " + dec);*/
+		System.out.println("Encrypted: " + enc);
+		System.out.println("Decrypted: " + dec);
 		
 		HashMap<String,Float> hm = new HashMap<String, Float>();
 		hm = FrequencyFinder.getStandardSwedishFrequency();
@@ -69,7 +71,7 @@ public class Main {
 		for(Entry<String,Float> kv : hm.entrySet()){
 			acc += kv.getValue();
 		}
-		System.out.println("freq sum: " + acc + "\nsize: " + hm.size());
+		System.out.println("freq sum: " + acc + "\nsize: " + hm.size());*/
 	}
 	
 	private static String readFile(Path p) throws IOException{
